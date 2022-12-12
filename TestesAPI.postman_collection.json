@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "1df4ad4c-654f-4de6-b064-a161d1503162",
+		"name": "TestesAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24050292"
+	},
+	"item": [
+		{
+			"name": "Atividades V1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando nome do Status\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type\", () =>{\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valor do Content-Type\", () =>{\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql(\"application/json; charset=utf-8; v=1.0\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de Resposta\",() => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando ID 1\", () => {\r",
+							"    pm.expect(jsonData[0].id).to.eql(1);\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Agrupando Testes\", () => {\r",
+							"    pm.expect(jsonData[0].completed).to.eql(false);\r",
+							"    pm.expect(jsonData[0].title).to.be.a(\"String\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							" \r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlAzzure}}/api/v1/Activities",
+					"host": [
+						"{{urlAzzure}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Activities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{urlAzzure}}/api/v1/Activities/{{ID-NEW}}",
+					"host": [
+						"{{urlAzzure}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Activities",
+						"{{ID-NEW}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atividads V1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 31,\r\n  \"title\": \"Testes Para Delecao\",\r\n  \"dueDate\": \"2022-12-12T22:25:39.076Z\",\r\n  \"completed\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlAzzure}}/api/v1/Activities",
+					"host": [
+						"{{urlAzzure}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Activities"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
